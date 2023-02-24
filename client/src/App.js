@@ -6,8 +6,17 @@ function App() {
   const [ user, setUser ] = useState("");
   const [ password, setPassword ] = useState("");
 
-  const handleClick = () =>{
-    console.log(`${user} ${password}`);  
+  const handleClick = async() =>{
+    const response = await fetch('http://localhost:8080/', {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: {
+       "user": user,
+       "password": password
+      }
+    }) 
   }
   return (
     <div className="App">
