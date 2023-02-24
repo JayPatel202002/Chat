@@ -5,7 +5,7 @@ const userDB = {
 
 const path = require('path');
 const fsPromises = require('fs').promises;
-const bcrypt = require('bcrypt');
+const {bcrypt, hash} = require('bcrypt');
 
 const handleRegister = async(req, res)=>{
     const { user, pwd } = req.body;
@@ -17,7 +17,7 @@ const handleRegister = async(req, res)=>{
     if(duplicate) return res.sendStatus(409);
 
     try{
-        const hashedPwd = await bcrypt.hash(pwd, 12);
+        const hashedPwd = await hash(pwd, 12);
 
         const newUser = {"username":user, "password": hashedPwd}
         userDB.setUsers([...userDB.users, newUser]);
