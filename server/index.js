@@ -12,6 +12,7 @@ app.post("/", (req, res)=>{
 })
 
 app.use('/register', require('./routes/register'));
+app.use('/auth', require('./routes/auth'));
 
 app.listen(PORT, ()=>{
     console.log(`The server is running on the http://localhost:${PORT}`)
