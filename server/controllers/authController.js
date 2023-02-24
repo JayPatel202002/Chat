@@ -20,13 +20,17 @@ const handleAuth = async(req, res)=>{
     if(match){
 
         const accessToken = jwt.sign(
-            {"username":foundUser.username},
-            process.env.ACCESS_TOKEN_SECERT,
-            { expiresIn: '15m'}
-        )
-        // return res.status(201).json({
-        //     'message': `the User ${user} is successfully logged in!!`
-        // })
+            { "username": foundUser.username },
+            "qwertyuio",
+            { expiresIn: '30s' }
+        );
+        const refreshToken = jwt.sign(
+            { "username": foundUser.username },
+            "asdfjklp",
+            { expiresIn: '1d' }
+        );
+
+        res.cookie('jwt',refreshToken,{ httpOnly: true });
 
         res.send({ accessToken })
     }else{

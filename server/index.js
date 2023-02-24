@@ -2,7 +2,10 @@ const express = require('express');
 const PORT  = 8080;
 const app = express();
 require('dotenv').config();
+const cookieParser = require('cookie-parser');
 app.use(express.json())
+
+app.use(cookieParser())
 app.get('/', (req, res)=>{
     res.send("hello server is running!!")
 })
