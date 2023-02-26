@@ -15,7 +15,7 @@ const verifyJWT = (req, res, next)=>{
         token,
         "qwertyuio",    
         (err, decoded)=>{
-            if(err) return sendStatus(403);
+            if(err) return res.sendStatus(403);
             req.user = decoded.username;
             next()
         })
