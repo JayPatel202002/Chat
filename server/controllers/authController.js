@@ -29,7 +29,6 @@ const handleAuth = async(req, res)=>{
             "asdfjklp",
             { expiresIn: '1d' }
         );
-
         res.cookie('jwt',refreshToken,{ httpOnly: true });
 
         res.send({ accessToken })
