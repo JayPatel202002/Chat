@@ -4,7 +4,8 @@ const userDB = {
 }
 const  bcrypt  = require('bcrypt');
 const jwt = require('jsonwebtoken'); 
-
+const {createRefreshToken}  = require('../controllers/authToken');
+const {createAccessToken}  = require('../controllers/authToken');
 const handleAuth = async(req, res)=>{
     const { user, pwd } = req.body;
 
@@ -19,19 +20,19 @@ const handleAuth = async(req, res)=>{
 
     if(match){
 
-        const accessToken = jwt.sign(
-            { "username": foundUser.username },
-            "qwertyuio",
-            { expiresIn: '30s' }
-        );
-        const refreshToken = jwt.sign(
-            { "username": foundUser.username },
-            "asdfjklp",
-            { expiresIn: '1d' }
-        );
-        res.cookie('jwt',refreshToken,{ httpOnly: true });
+        // const accessToken = jwt.sign(
+        //     { "username": foundUser.username },
+        //     "qwertyuio",
+        //     { expiresIn: '10m' }
+        // );
+        // const refreshToken = jwt.sign(
+        //     { "username": foundUser.username },
+        //     "asdfjklp",
+        //     { expiresIn: '1d' }
+        // );
+        res.cookie('jwt',createRefreshToken(foundUser.username),{ httpOnly: true });
 
-        res.send({ accessToken })
+        res.send( createAccessToken(foundUser.username) )
     }else{
         res.sendStatus(401); 
     }
