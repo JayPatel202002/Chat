@@ -7,17 +7,18 @@ function App() {
   const [ password, setPassword ] = useState("");
 
   const handleClick = async() =>{
-    const response = await fetch('http://localhost:8080/', {
+    const response = await fetch('http://localhost:8080/auth', {
       method:"POST",
       headers:{
         "Content-Type":"application/json"
       },
-      body: {
-       "user": user,
-       "password": password
-      }
-    }) 
+      body: JSON.stringify({user, password })
+    })
+    const data = await response.json();
+    console.log(data); 
   }
+
+  
   return (
     <div className="App">
       <form>

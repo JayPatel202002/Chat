@@ -21,7 +21,6 @@ const handleAuth = async(req, res)=>{
     if(match){
 
         res.cookie('jwt',createRefreshToken(foundUser.username),{ httpOnly: true });
-
         res.send( createAccessToken(foundUser.username) )
     }else{
         res.sendStatus(401); 

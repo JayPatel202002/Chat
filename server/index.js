@@ -8,6 +8,7 @@ require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const { verify } = require('jsonwebtoken');
 const { createAccessToken } = require('./controllers/authToken');
+const { createRefreshToken } = require('./controllers/authToken');
 
 const userDB = {
     users: require('./model/users.json'),
@@ -50,9 +51,7 @@ app.post('/refresh_token', async(req, res)=>{
         return res.send({ ok:false, accessToken:''});
     }
 
-    res.cookie('jwt'
-    ,createRefreshToken(foundUser.username),
-    { httpOnly: true });
+    res.cookie('jwt',createRefreshToken(user),{ httpOnly: true });
 
     return res.send({ ok:true, accessToken: createAccessToken(user)});
 
