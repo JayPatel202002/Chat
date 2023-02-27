@@ -20,8 +20,18 @@ const handleAuth = async(req, res)=>{
 
     if(match){
 
-        res.cookie('jwt',createRefreshToken(foundUser.username),{ httpOnly: true });
-        res.send( createAccessToken(foundUser.username) )
+        const accessToken = jwt.sign(
+            { "username": foundUser.username },
+            "qwertyuio",
+            { expiresIn: '10m' }
+        );
+        const refreshToken = jwt.sign(
+            { "username": foundUser.username },
+            "asdfjklp",
+            { expiresIn: '1d' }
+        );
+        res.cookie('jwt',refreshToken,{ httpOnly: true });
+        res.send({accessToken})
     }else{
         res.sendStatus(401); 
     }

@@ -4,18 +4,21 @@ import { useState } from 'react';
 function App() {
 
   const [ user, setUser ] = useState("");
-  const [ password, setPassword ] = useState("");
+  const [ pwd, setPassword ] = useState("");
 
   const handleClick = async() =>{
+    let accessToken = '';
     const response = await fetch('http://localhost:8080/auth', {
       method:"POST",
       headers:{
         "Content-Type":"application/json"
       },
-      body: JSON.stringify({user, password })
+      body: JSON.stringify({user, pwd })
     })
     const data = await response.json();
-    console.log(data); 
+   accessToken = data.accessToken;
+   console.log(accessToken);
+
   }
 
   
@@ -32,8 +35,8 @@ function App() {
         <p>Password</p>
         <input 
           type="password"
-          value = {password}
-          placeholder = "Enter your password"
+          value = {pwd}
+          placeholder = "Enter your pwd"
           onChange={ e => setPassword(e.target.value)}
         /> 
       </form>

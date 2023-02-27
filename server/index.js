@@ -9,6 +9,9 @@ const cookieParser = require('cookie-parser');
 const { verify } = require('jsonwebtoken');
 const { createAccessToken } = require('./controllers/authToken');
 const { createRefreshToken } = require('./controllers/authToken');
+const cors = require('cors');
+
+
 
 const userDB = {
     users: require('./model/users.json'),
@@ -16,6 +19,12 @@ const userDB = {
 }
 
 app.use(express.json())
+
+// adding the cors
+app.use(cors({
+    origin:'*',
+    credentials:true
+}))
 
 app.use(cookieParser())
 app.get('/', (req, res)=>{
