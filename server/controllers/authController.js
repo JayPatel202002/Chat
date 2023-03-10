@@ -31,6 +31,7 @@ const handleAuth = async(req, res)=>{
             { expiresIn: '1d' }
         );
         res.cookie('jwt',refreshToken,{ httpOnly: true });
+
         res.send({accessToken})
     }else{
         res.sendStatus(401); 

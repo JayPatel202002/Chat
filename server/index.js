@@ -22,7 +22,7 @@ app.use(express.json())
 
 // adding the cors
 app.use(cors({
-    origin:'*',
+    origin:'http://localhost:3000',
     credentials:true
 }))
 
