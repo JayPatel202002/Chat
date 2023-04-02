@@ -4,8 +4,6 @@ const userDB = {
 }
 const  bcrypt  = require('bcrypt');
 const jwt = require('jsonwebtoken'); 
-const {createRefreshToken}  = require('../controllers/authToken');
-const {createAccessToken}  = require('../controllers/authToken');
 const handleAuth = async(req, res)=>{
     const { user, pwd } = req.body;
 
